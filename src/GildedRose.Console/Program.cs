@@ -1,5 +1,6 @@
 ﻿using GildedRose.Inventory.Domain;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GildedRose.Console
 {
@@ -22,8 +23,10 @@ namespace GildedRose.Console
 
         private static void UpdateQuality()
         {
-            InventoryProcessor inventoryProcessor = new InventoryProcessor();
-            inventoryProcessor.UpdateQuality(Items);
+            foreach (InventoryItem item in Items.Cast<InventoryItem>())
+            {
+                item.ProcessInventoryItem();
+            }
         }
 
         private static void PrintItems(string message, IList<Item> items)
